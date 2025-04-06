@@ -1,0 +1,288 @@
+/* login.css - Responsive styles for the split login page layout */
+
+/* Main container */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f7fa;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Split layout container */
+.login-split-layout {
+  display: flex;
+  flex-direction: column; /* Stack vertically on mobile */
+  max-width: 1200px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  height: auto; /* Auto height for mobile */
+}
+
+/* Left side with image */
+.login-image-section {
+  flex: 1;
+  position: relative;
+  background-color: #3a5ce4;
+  overflow: hidden;
+  min-height: 200px; /* Minimum height on mobile */
+}
+
+.login-image {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.login-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.login-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem; /* Smaller padding on mobile */
+  color: white;
+  text-align: left;
+}
+
+.login-image-overlay h2 {
+  font-size: 1.5rem; /* Smaller text on mobile */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.login-image-overlay p {
+  font-size: 0.9rem; /* Smaller text on mobile */
+  opacity: 0.9;
+  max-width: 100%;
+}
+
+/* Right side with form */
+.login-form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem; /* Smaller padding on mobile */
+  background-color: white;
+}
+
+/* Login card */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+}
+
+.login-card h1 {
+  color: #4a6cf7;
+  font-size: 1.5rem; /* Smaller on mobile */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  transition: all 0.2s ease-in-out;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+  background-color: white;
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* Helper text/hints */
+.hint {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Login button */
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background-color: #4a6cf7;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #3a5ce4;
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+/* Help text at the bottom */
+.login-help {
+  margin-top: 1.5rem;
+  color: #64748b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.login-help a {
+  color: #4a6cf7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-help a:hover {
+  text-decoration: underline;
+}
+
+/* Alert for errors */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.alert-error {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-left: 3px solid #dc2626;
+}
+
+/* Small phones (up to 480px) */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 0;
+  }
+  
+  .login-form-section {
+    padding: 1rem;
+  }
+  
+  .login-image-section {
+    min-height: 150px;
+  }
+  
+  .login-image-overlay {
+    padding: 1rem;
+  }
+  
+  .login-image-overlay h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Medium phones to tablets (481px to 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .login-image-section {
+    min-height: 180px;
+  }
+}
+
+/* Tablets to small laptops (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .login-split-layout {
+    flex-direction: row; /* Switch to horizontal layout */
+    height: 500px; /* Set fixed height */
+  }
+  
+  .login-image-overlay h2 {
+    font-size: 1.75rem;
+  }
+  
+  .login-image-overlay p {
+    font-size: 1rem;
+  }
+  
+  .login-card h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Laptops and desktops (1024px and up) */
+@media (min-width: 1024px) {
+  .login-split-layout {
+    flex-direction: row; /* Horizontal layout */
+    height: 600px; /* Taller on larger screens */
+  }
+  
+  .login-image-overlay {
+    padding: 3rem;
+  }
+  
+  .login-image-overlay h2 {
+    font-size: 2rem;
+  }
+  
+  .login-image-overlay p {
+    font-size: 1.1rem;
+    max-width: 80%;
+  }
+  
+  .login-card h1 {
+    font-size: 1.8rem;
+  }
+  
+  .login-form-section {
+    padding: 2rem;
+  }
+}
+
+/* Extra large screens (1440px and up) */
+@media (min-width: 1440px) {
+  .login-split-layout {
+    height: 700px; /* Even taller on very large screens */
+  }
+}
