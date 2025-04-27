@@ -43,6 +43,8 @@ http://localhost:5173
 conference-room-booking/
 ├── public/
 │   ├── index.html
+│   ├── logo.png
+│   ├── app_logo.png
 │   └── favicon.ico
 ├── src/
 │   ├── assets/
@@ -65,6 +67,9 @@ conference-room-booking/
 │   ├── hooks/
 │   │   ├── useAuth.js
 │   │   └── useBookings.js
+|   ├── styles/
+│   │   ├── Header.css
+│   │   └── UserManagement.css
 │   ├── App.jsx
 │   ├── index.jsx
 │   └── styles.css
