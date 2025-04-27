@@ -78,6 +78,7 @@ const BookingCalendar = ({ date, onDateChange, selectedRoom, onBookingClick }) =
           value={date} 
           onChange={(e) => onDateChange(e.target.value)}
           className="date-picker"
+          min={new Date().toISOString().split('T')[0]} // Disable past dates
         />
         <button onClick={goToNextDay} className="btn btn-icon">
           &gt;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import UserForm from './UserForm';
+import '../styles/UserManagement.css'; // Import the CSS file
 
 const UserManagement = () => {
   const { users, deleteUser } = useAuth();
@@ -41,10 +42,7 @@ const UserManagement = () => {
     <div className="user-management">
       <div className="section-header">
         <h2>User Management</h2>
-        <button 
-          className="btn btn-primary"
-          onClick={handleAddUser}
-        >
+        <button style={{ backgroundColor: `var(--primary-color)` }} className="btn btn-primary" onClick={handleAddUser}>
           Add User
         </button>
       </div>
@@ -56,7 +54,7 @@ const UserManagement = () => {
         <table>
           <thead>
             <tr>
-              <th>Employee ID</th>
+              <th>Emp ID</th>
               <th>Name</th>
               <th>Role</th>
               <th>Actions</th>
@@ -67,17 +65,17 @@ const UserManagement = () => {
               <tr key={user.empId}>
                 <td>{user.empId}</td>
                 <td>{user.name}</td>
-                <td>{user.isAdmin ? 'Administrator' : 'User'}</td>
+                <td>{user.isAdmin ? 'Administrator' : 'Employee'}</td>
                 <td>
                   <div className="table-actions">
-                    <button 
+                    <button
                       className="btn btn-icon"
                       onClick={() => handleEditUser(user)}
                       title="Edit User"
                     >
                       ✏️
                     </button>
-                    <button 
+                    <button
                       className="btn btn-icon"
                       onClick={() => handleDeleteUser(user.empId)}
                       title="Delete User"
@@ -95,7 +93,7 @@ const UserManagement = () => {
       {isUserFormOpen && (
         <div className="modal">
           <div className="modal-content">
-            <UserForm 
+            <UserForm
               user={editingUser}
               onClose={handleCloseUserForm}
             />

@@ -1,0 +1,238 @@
+/* Header.css */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.logo-image {
+  height: 50px;
+  width: 120px;
+  object-fit: cover;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #4f46e5;
+}
+
+.nav-link.active {
+  color: #4f46e5;
+}
+
+/* Active link indicator */
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4f46e5;
+}
+
+.user-info {
+  position: relative;
+}
+
+.user-dropdown {
+  position: relative;
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.user-icon:hover {
+  background-color: #f3f4f6;
+}
+
+.user-icon span {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  min-width: 150px;
+  padding: 0.5rem;
+  z-index: 101;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn {
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #e5e7eb;
+}
+
+.btn-highlight {
+  color: #ef4444;
+}
+
+.btn-highlight:hover {
+  background-color: #fee2e2;
+}
+
+/* Mobile menu and burger icon */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.burger-icon {
+  display: block;
+  width: 24px;
+  height: 20px;
+  position: relative;
+}
+
+.burger-icon span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #1f2937;
+  border-radius: 3px;
+  left: 0;
+  transition: all 0.25s ease;
+}
+
+.burger-icon span:nth-child(1) {
+  top: 0;
+}
+
+.burger-icon span:nth-child(2) {
+  top: 8px;
+}
+
+.burger-icon span:nth-child(3) {
+  top: 16px;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 99;
+}
+
+.mobile-menu .nav-link {
+  display: block;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-menu .user-info-mobile {
+  padding: 0.75rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0.5rem 1rem;
+  }
+  
+  .logo h1 {
+    font-size: 1rem;
+  }
+  
+  .logo-image {
+    height: 32px;
+  }
+  
+  .main-nav {
+    display: none;
+  }
+  
+  .user-info {
+    display: none;
+  }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  .mobile-menu.open {
+    display: block;
+  }
+}
+
+/* For extremely small screens */
+@media (max-width: 360px) {
+  .logo h1 {
+    font-size: 0.875rem;
+  }
+  
+  .logo-image {
+    height: 28px;
+  }
+}
