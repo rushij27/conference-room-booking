@@ -56,7 +56,7 @@ const Header = () => {
         <div className="logo">
           {/* Replace the src with your actual logo */}
           <img 
-            src="/app_logo.png" 
+            src="/header.png" 
             alt="Conference Room Booking Logo" 
             className="logo-image" 
           />
