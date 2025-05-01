@@ -16,13 +16,54 @@ const BookingForm = ({ booking, roomId, date, onClose }) => {
     roomId: roomId || '',
     title: '',
     date: date,
-    startTime: '09:00',
-    endTime: '10:00',
+    startTime: '08:00',
+    endTime: '09:00',
     attendees: 1,
   });
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [timeSlots, setTimeSlots] = useState([]);
+
+
+  const BUSINESS_HOURS = {
+    start: '08:00',
+    end: '18:00',
+    minDuration: 30, // minimum booking duration in minutes
+    maxDuration: 240, // maximum booking duration in minutes (4 hours)
+  };
+
+  // Generate time slots for business hours
+  useEffect(() => {
+    const slots = [];
+    for (let hour = 8; hour < 18; hour++) {
+      slots.push(`${hour.toString().padStart(2, '0')}:00`);
+      slots.push(`${hour.toString().padStart(2, '0')}:30`);
+    }
+    setTimeSlots(slots);
+  }, []);
+
+  // Convert 12-hour format to 24-hour format
+  const convertTo24Hour = (time12h) => {
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes] = time.split(':');
+    hours = parseInt(hours, 10);
+    if (hours === 12) {
+      hours = modifier === 'PM' ? 12 : 0;
+    } else {
+      hours = modifier === 'PM' ? hours + 12 : hours;
+    }
+    return `${hours.toString().padStart(2, '0')}:${minutes}`;
+  };
+
+  // Convert 24-hour format to 12-hour format
+  const convertTo12Hour = (time24h) => {
+    const [hours, minutes] = time24h.split(':');
+    const hour = parseInt(hours, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${minutes} ${ampm}`;
+  };
 
   // If editing an existing booking, populate form fields
   useEffect(() => {
@@ -40,10 +81,20 @@ const BookingForm = ({ booking, roomId, date, onClose }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === 'attendees' ? parseInt(value, 10) : value
-    }));
+    
+    if (name === 'startTime' || name === 'endTime') {
+      const time24h = convertTo24Hour(value);
+      setFormData(prev => ({
+        ...prev,
+        [name]: time24h
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: name === 'attendees' ? parseInt(value, 10) : value
+      }));
+    }
+    setError(''); // Clear any previous errors
   };
 
   const handleSubmit = (e) => {
@@ -51,7 +102,7 @@ const BookingForm = ({ booking, roomId, date, onClose }) => {
     setError('');
     setSuccess('');
 
-    // Validate input
+    // Basic form validation
     if (!formData.roomId) {
       setError('Please select a room');
       return;
@@ -62,11 +113,41 @@ const BookingForm = ({ booking, roomId, date, onClose }) => {
       return;
     }
 
+    // Validate start time
+    if (formData.startTime < BUSINESS_HOURS.start || formData.startTime > BUSINESS_HOURS.end) {
+      setError(`Start time must be between ${convertTo12Hour(BUSINESS_HOURS.start)} and ${convertTo12Hour(BUSINESS_HOURS.end)}`);
+      return;
+    }
+
+    // Validate end time
+    if (formData.endTime < BUSINESS_HOURS.start || formData.endTime > BUSINESS_HOURS.end) {
+      setError(`End time must be between ${convertTo12Hour(BUSINESS_HOURS.start)} and ${convertTo12Hour(BUSINESS_HOURS.end)}`);
+      return;
+    }
+
+    // Validate relationship between start and end times
     if (formData.startTime >= formData.endTime) {
       setError('End time must be after start time');
       return;
     }
 
+    // Calculate duration
+    const [startHours, startMinutes] = formData.startTime.split(':').map(Number);
+    const [endHours, endMinutes] = formData.endTime.split(':').map(Number);
+    const duration = (endHours - startHours) * 60 + (endMinutes - startMinutes);
+
+    // Validate duration
+    if (duration < BUSINESS_HOURS.minDuration) {
+      setError(`Booking duration must be at least ${BUSINESS_HOURS.minDuration} minutes`);
+      return;
+    }
+
+    if (duration > BUSINESS_HOURS.maxDuration) {
+      setError(`Booking duration cannot exceed ${BUSINESS_HOURS.maxDuration} minutes`);
+      return;
+    }
+
+    // Validate room capacity
     const selectedRoom = getRoomById(parseInt(formData.roomId, 10));
     if (formData.attendees > selectedRoom.capacity) {
       setError(`The number of attendees exceeds room capacity (${selectedRoom.capacity} people)`);
@@ -159,30 +240,36 @@ const BookingForm = ({ booking, roomId, date, onClose }) => {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="startTime">Start Time</label>
-            <input
-              type="time"
+            <select
               id="startTime"
               name="startTime"
-              value={formData.startTime}
+              value={convertTo12Hour(formData.startTime)}
               onChange={handleChange}
-              min="08:00"
-              max="17:30"
               required
-            />
+            >
+              {timeSlots.map(time => (
+                <option key={`start-${time}`} value={convertTo12Hour(time)}>
+                  {convertTo12Hour(time)}
+                </option>
+              ))}
+            </select>
           </div>
           
           <div className="form-group">
             <label htmlFor="endTime">End Time</label>
-            <input
-              type="time"
+            <select
               id="endTime"
               name="endTime"
-              value={formData.endTime}
+              value={convertTo12Hour(formData.endTime)}
               onChange={handleChange}
-              min="08:30"
-              max="18:00"
               required
-            />
+            >
+              {timeSlots.map(time => (
+                <option key={`end-${time}`} value={convertTo12Hour(time)}>
+                  {convertTo12Hour(time)}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
