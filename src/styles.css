@@ -489,7 +489,7 @@ button:disabled {
   }
   
   .actions {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 1rem;
   }
@@ -498,9 +498,6 @@ button:disabled {
     font-size: 1.1rem;
   }
   
-  .actions .btn {
-    width: 100%;
-  }
 }
 
 @media (max-width: 468px) {
@@ -512,4 +509,131 @@ button:disabled {
     font-size: 0.9rem;
     padding: 4px 8px;
   }
+}
+
+/* Mobile specific styles */
+.mobile-view {
+  flex-direction: column;
+}
+
+.mobile-room-selector-container {
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid var(--gray-300);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room-selector-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 0.8rem;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+  color: var(--primary-color);
+}
+
+.arrow.up {
+  transform: rotate(180deg);
+}
+
+.mobile-room-list {
+  margin-top: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+}
+
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  gap: 0.75rem;
+}
+
+/* Override existing room-card styles for mobile */
+.mobile-room-list .room-card {
+  min-width: 200px;
+  background-color: var(--secondary-color);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  padding: 0.75rem;
+  margin-right: 0;
+  cursor: pointer;
+  transition: var(--transition);
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.mobile-room-list .room-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.mobile-room-list .room-card.selected {
+  border-color: var(--primary-color);
+}
+
+.mobile-room-list .room-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--gray-900);
+}
+
+.mobile-room-list .room-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: var(--gray-700);
+}
+
+.capacity, .feature {
+  background-color: var(--gray-200);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.mobile-main {
+  padding: 1rem;
+}
+
+.mobile-heading {
+  font-size: 1.1rem;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.mobile-modal {
+  width: 95%;
+  max-height: 80vh;
+  padding: 1rem;
+}
+
+/* Update the BookingCalendar height for mobile */
+.mobile-main .booking-calendar {
+  height: calc(100vh - 220px);
+}
+
+/* Responsive adjustments - leverage existing media queries */
+@media (max-width: 768px) {
+  /* These styles are already in your main CSS */
 }
