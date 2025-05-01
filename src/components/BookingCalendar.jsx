@@ -74,17 +74,64 @@ const BookingCalendar = ({ date, onDateChange, selectedRoom, onBookingClick }) =
 
   return (
     <div className="booking-calendar">
+      <style>
+        {`
+          .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+          }
+          
+          .date-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+          }
+          
+          .date-picker {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 0.375rem 0.75rem;
+          }
+          
+          .formatted-date {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #495057;
+          }
+          
+          .btn-icon {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #495057;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+          }
+          
+          .btn-icon:hover {
+            background-color: #e9ecef;
+          }
+        `}
+      </style>
       <div className="calendar-header">
         <button onClick={goToPreviousDay} className="btn btn-icon">
           &lt;
         </button>
-        <input 
-          type="date" 
-          value={date} 
-          onChange={(e) => onDateChange(e.target.value)}
-          className="date-picker"
-          min={new Date().toISOString().split('T')[0]} // Disable past dates
-        />
+        <div className="date-display">
+          <input 
+            type="date" 
+            value={date} 
+            onChange={(e) => onDateChange(e.target.value)}
+            className="date-picker"
+            min={new Date().toISOString().split('T')[0]} // Disable past dates
+          />
+        </div>
         <button onClick={goToNextDay} className="btn btn-icon">
           &gt;
         </button>
