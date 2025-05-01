@@ -45,6 +45,17 @@ const Dashboard = () => {
     setIsRoomFormOpen(false);
   };
 
+  // Format date for display
+  const formatDateForDisplay = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   return (
     <div className="dashboard">
       <div className="dashboard-content">
@@ -69,7 +80,7 @@ const Dashboard = () => {
         
         <main className="main-content">
           <div className="actions">
-            <h2>Bookings for {selectedDate}</h2>
+            <h2>Book for {formatDateForDisplay(selectedDate)}</h2>
             <button 
               className="btn btn-primary"
               onClick={handleAddBooking}
