@@ -61,9 +61,14 @@ const BookingCalendar = ({ date, onDateChange, selectedRoom, onBookingClick }) =
     const endMinutes = convertTimeToMinutes(booking.endTime);
     const duration = endMinutes - startMinutes;
 
+    // Each time slot is 30 minutes, so we need to adjust the position and height
+    const slotHeight = 60; // Height of each 30-minute slot in pixels
+    const top = (startMinutes / 30) * slotHeight;
+    const height = (duration / 30) * slotHeight;
+
     return {
-      top: `${startMinutes}px`,
-      height: `${duration}px`,
+      top: `${top}px`,
+      height: `${height}px`,
     };
   };
 
