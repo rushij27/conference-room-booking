@@ -35,6 +35,22 @@ const Header = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isDropdownOpen]);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMobileMenuOpen && 
+        !event.target.closest('.mobile-menu') && 
+        !event.target.closest('.mobile-menu-button')
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
   const toggleDropdown = (e) => {
     e.stopPropagation();
     setIsDropdownOpen((prev) => !prev);
@@ -117,39 +133,35 @@ const Header = () => {
       </header>
       
       {/* Mobile Menu */}
-      {isMobile && (
-        <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
-          {currentUser.isAdmin && isDropdownOpen && (
-            <>
-              <Link 
-                to="/dashboard" 
-                className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Dashboard
-              </Link>
-              
-              <Link 
-                to="/users" 
-                className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                User Management
-              </Link>
-            </>
-          )}
-          
-          <div className="user-info-mobile">
-            <span>{currentUser.name}</span>
-            <button 
-              className="btn btn-outline btn-highlight" 
+     {isMobile && <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+        {currentUser.isAdmin && (
+          <>
+            <Link 
+              to="/dashboard" 
+              className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Dashboard
+            </Link>
+            
+            <Link 
+              to="/users" 
+              className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              User Management
+            </Link>
+            <Link 
+              to="/" 
+              className={`nav-link`}
+              style={{ color: 'red' }}
               onClick={handleLogout}
             >
               Logout
-            </button>
-          </div>
-        </div>
-      )}
+            </Link>
+          </>
+        )}
+      </div>}
     </>
   );
 };

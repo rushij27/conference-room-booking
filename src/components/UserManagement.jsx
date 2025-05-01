@@ -65,7 +65,7 @@ const UserManagement = () => {
               <tr key={user.empId}>
                 <td>{user.empId}</td>
                 <td>{user.name}</td>
-                <td>{user.isAdmin ? 'Administrator' : 'Employee'}</td>
+                <td>{user.isAdmin ? 'Admin' : 'Employee'}</td>
                 <td>
                   <div className="table-actions">
                     <button
