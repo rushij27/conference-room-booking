@@ -80,7 +80,15 @@ const Dashboard = () => {
         
         <main className="main-content">
           <div className="actions">
-            <h2>Book for {formatDateForDisplay(selectedDate)}</h2>
+            <h2>Book for &nbsp;
+              <span style={{ backgroundColor: "var(--secondary-color)",
+                  padding: "5px 10px",
+                  borderBottom: "2px solid var(--primary-color)",
+                  borderRadius: "5px" 
+                }}>
+                {formatDateForDisplay(selectedDate)}
+              </span>
+            </h2>
             <button 
               className="btn btn-primary"
               onClick={handleAddBooking}
