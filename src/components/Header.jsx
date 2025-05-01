@@ -39,8 +39,8 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        isMobileMenuOpen && 
-        !event.target.closest('.mobile-menu') && 
+        isMobileMenuOpen &&
+        !event.target.closest('.mobile-menu') &&
         !event.target.closest('.mobile-menu-button')
       ) {
         setIsMobileMenuOpen(false);
@@ -71,32 +71,32 @@ const Header = () => {
       <header className="app-header">
         <div className="logo">
           {/* Replace the src with your actual logo */}
-          <img 
-            src="/header.png" 
-            alt="Conference Room Booking Logo" 
-            className="logo-image" 
+          <img
+            src="/header.png"
+            alt="Conference Room Booking Logo"
+            className="logo-image"
           />
         </div>
-        
+
         {/* Desktop Navigation */}
         {currentUser.isAdmin && (
           <nav className="main-nav">
-            <Link 
-              to="/dashboard" 
+            <Link
+              to="/dashboard"
               className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
             >
               Dashboard
             </Link>
-            
-            <Link 
-              to="/users" 
+
+            <Link
+              to="/users"
               className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`}
             >
               User Management
             </Link>
           </nav>
         )}
-        
+
         {/* Desktop User Info */}
         <div className="user-info">
           {currentUser && (
@@ -106,8 +106,8 @@ const Header = () => {
               </div>
               {isDropdownOpen && (
                 <div className="dropdown-menu">
-                  <button 
-                    className="btn btn-outline btn-highlight" 
+                  <button
+                    className="btn btn-outline btn-highlight"
                     onClick={handleLogout}
                   >
                     Logout
@@ -117,50 +117,50 @@ const Header = () => {
             </div>
           )}
         </div>
-        
+
         {/* Mobile Menu Button */}
-        <button 
-          className="mobile-menu-button" 
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
-          <div className="burger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+        {currentUser.isAdmin && isMobile && 
+          <button
+            className="mobile-menu-button"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            <div className="burger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        }
       </header>
-      
+
       {/* Mobile Menu */}
-     {isMobile && <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
-        {currentUser.isAdmin && (
-          <>
-            <Link 
-              to="/dashboard" 
-              className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Dashboard
-            </Link>
-            
-            <Link 
-              to="/users" 
-              className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              User Management
-            </Link>
-            <Link 
-              to="/" 
-              className={`nav-link`}
-              style={{ color: 'red' }}
-              onClick={handleLogout}
-            >
-              Logout
-            </Link>
-          </>
-        )}
+      {currentUser.isAdmin && isMobile && <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+        <>
+          <Link
+            to="/dashboard"
+            className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Dashboard
+          </Link>
+
+          <Link
+            to="/users"
+            className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            User Management
+          </Link>
+          <Link
+            to="/"
+            className={`nav-link`}
+            style={{ color: 'red' }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Link>
+        </>
       </div>}
     </>
   );
