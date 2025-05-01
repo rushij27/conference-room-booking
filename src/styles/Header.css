@@ -25,9 +25,15 @@
 }
 
 .logo-image {
-  height: 50px;
-  width: 120px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.logo-text {
+  width: 125px;
+  height: 70px;
   object-fit: cover;
+  margin-top: 3px;
 }
 
 .main-nav {
@@ -207,8 +213,16 @@
   }
   
   .logo-image {
-    height: 32px;
+    height: 60px;
+    object-fit: contain;
   }
+
+  .logo-text {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    margin-top: 3px;
+  }  
   
   .main-nav {
     display: none;
@@ -236,6 +250,15 @@
   }
   
   .logo-image {
-    height: 28px;
+    height: 45px;
+    object-fit: contain;
   }
+
+  .logo-text {
+    width: 90px;
+    height: 45px;
+    object-fit: cover;
+    margin-top: 3px;
+  }
+  
 }
