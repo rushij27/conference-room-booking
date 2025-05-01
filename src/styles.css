@@ -119,11 +119,17 @@ button, input, select {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .actions h2 {
   font-size: 1.25rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Room List Styles */
@@ -482,15 +488,28 @@ button:disabled {
     gap: 0;
   }
   
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
   .actions h2 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .actions .btn {
+    width: 100%;
   }
 }
 
 @media (max-width: 468px) {
   .actions h2 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .actions h2 span {
+    font-size: 0.9rem;
+    padding: 4px 8px;
   }
 }
