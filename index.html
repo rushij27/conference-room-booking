@@ -5,6 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/favIcon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nex Room</title>
+    <!--
+      Telegram WebApp SDK — must load synchronously before React boots so that
+      window.Telegram.WebApp is available when initTelegramApp() runs in main.jsx.
+
+      The script is a no-op in a normal browser; it only activates inside the
+      Telegram client. It injects launch parameters (initData, themeParams, etc.)
+      directly onto window.Telegram.WebApp.
+    -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
   <body>
     <div id="root"></div>

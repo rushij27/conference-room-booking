@@ -1,0 +1,85 @@
+/**
+ * TelegramAuthGate.css
+ *
+ * Styles for the full-screen loading / error screens shown during the
+ * /telegram entry-point authentication flow.
+ *
+ * Telegram theme CSS variables (--tg-*) are applied by TelegramBootstrap
+ * in App.jsx when themeParams are available, so they work here automatically.
+ */
+
+/* ── Shared screen wrapper ── */
+.tg-auth-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh; /* dynamic viewport — avoids address-bar offset on mobile */
+  padding: 1.5rem;
+  background: var(--tg-theme-bg-color, #1c1c1e);
+}
+
+/* ── Card ── */
+.tg-auth-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+/* ── Text ── */
+.tg-auth-message {
+  font-size: 0.95rem;
+  margin: 0;
+  max-width: 280px;
+  color: var(--tg-theme-text-color, #ffffff);
+  opacity: 0.85;
+}
+
+.tg-auth-hint {
+  font-size: 0.8rem;
+  margin: 0;
+  max-width: 260px;
+  color: var(--tg-theme-hint-color, #aaaaaa);
+}
+
+/* ── Icon ── */
+.tg-auth-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* ── Spinner ── */
+.tg-auth-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--tg-theme-button-color, #2481cc);
+  border-radius: 50%;
+  animation: tg-spin 0.75s linear infinite;
+}
+
+@keyframes tg-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Error icon shake ── */
+.tg-auth-error-screen .tg-auth-icon--error {
+  animation: tg-shake 0.4s ease-in-out;
+}
+
+@keyframes tg-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
